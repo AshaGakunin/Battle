@@ -1,14 +1,14 @@
-﻿using Dalamud.Game.Command;
+using Dalamud.Game.Command;
 using Dalamud.IoC;
 using Dalamud.Plugin;
 using System.IO;
 using System.Reflection;
 using Dalamud.Interface.Windowing;
-using SamplePlugin.Windows;
+using ChatToAction.Windows;
 
-namespace SamplePlugin
+namespace ChatToAction
 {
-    public sealed class Plugin : IDalamudPlugin
+    public sealed class ChatToAction : IDalamudPlugin
     {
         public string Name => "Sample Plugin";
         private const string CommandName = "/pmycommand";
@@ -16,9 +16,9 @@ namespace SamplePlugin
         private DalamudPluginInterface PluginInterface { get; init; }
         private CommandManager CommandManager { get; init; }
         public Configuration Configuration { get; init; }
-        public WindowSystem WindowSystem = new("SamplePlugin");
+        public WindowSystem WindowSystem = new("ChatToAction");
 
-        public Plugin(
+        public ChatToAction(
             [RequiredVersion("1.0")] DalamudPluginInterface pluginInterface,
             [RequiredVersion("1.0")] CommandManager commandManager)
         {
