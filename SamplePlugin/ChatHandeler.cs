@@ -7,6 +7,10 @@ using Dalamud.Game.Text;
 using Dalamud.Game;
 using XivCommon.Functions;
 using System.IO;
+using Dalamud.Game.Text.SeStringHandling;
+using Dalamud.Utility;
+using System.Runtime.CompilerServices;
+using System.Text.RegularExpressions;
 
 
 namespace ChatToAction
@@ -39,7 +43,7 @@ namespace ChatToAction
         {
             if (isHandled)
                 return;
-            ChatHandler.DoCommand(type, ((object)message).ToString());
+            ChatHandeler.DoCommand(type, ((object)message).ToString());
         }
     }
 }
