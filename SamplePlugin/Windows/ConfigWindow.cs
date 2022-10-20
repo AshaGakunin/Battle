@@ -10,11 +10,11 @@ public class ConfigWindow : Window, IDisposable
     private Configuration Configuration;
 
     public ConfigWindow(ChatToAction plugin) : base(
-        "A Wonderful Configuration Window",
-        ImGuiWindowFlags.NoResize | ImGuiWindowFlags.NoCollapse | ImGuiWindowFlags.NoScrollbar |
+        "Settings",
+        ImGuiWindowFlags.NoScrollbar |
         ImGuiWindowFlags.NoScrollWithMouse)
     {
-        this.Size = new Vector2(232, 75);
+        this.Size = new Vector2(400, 800);
         this.SizeCondition = ImGuiCond.Always;
 
         this.Configuration = plugin.Configuration;
@@ -29,6 +29,13 @@ public class ConfigWindow : Window, IDisposable
         if (ImGui.Checkbox("Random Config Bool", ref configValue))
         {
             this.Configuration.SomePropertyToBeSavedAndWithADefault = configValue;
+            // can save immediately on change, if you don't want to provide a "Save and Close" button
+            this.Configuration.Save();
+        }
+        var sayconfigValue = this.Configuration.Say;
+        if (ImGui.Checkbox("React To Say Chat", ref sayconfigValue))
+        {
+            this.Configuration.Say = configValue;
             // can save immediately on change, if you don't want to provide a "Save and Close" button
             this.Configuration.Save();
         }

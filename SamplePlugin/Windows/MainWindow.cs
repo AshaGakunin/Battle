@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Numerics;
 using Dalamud.Interface.Windowing;
 using ImGuiNET;
@@ -40,7 +40,7 @@ public class MainWindow : Window, IDisposable
 
         ImGui.Spacing();
 
-        ImGui.Text("Have a goat:");
+        ImGui.Text(this.Plugin.Configuration.GoatTextChange);
         ImGui.Indent(55);
         ImGui.Image(this.GoatImage.ImGuiHandle, new Vector2(this.GoatImage.Width, this.GoatImage.Height));
         ImGui.Unindent(55);
