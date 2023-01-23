@@ -4,7 +4,7 @@
         "Name": "Mod Battles",
         "Punchline": "Battle with others in a game of skill and luck.",
         "Description": "/MB to or hit the gear icon to get to the main page.",
-        "InternalName": "Mod Battles",
+        "InternalName": "ModBattles",
         "AssemblyVersion": "1.0.4.0",
         "RepoUrl": "https://github.com/AshaGakunin/Battle",
         "ApplicableVersion": "any",
