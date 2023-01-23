@@ -1,0 +1,18 @@
+{
+  "Author": "Zaria V",
+  "Name": "Mod Battles",
+  "InternalName": "ModBattles",
+  "AssemblyVersion": "1.0.4.0",
+  "Description": "/MB to or hit the gear icon to get to the main page.",
+  "ApplicableVersion": "any",
+  "RepoUrl": "",
+  "Tags": [
+    "Battle"
+  ],
+  "DalamudApiLevel": 8,
+  "LoadRequiredState": 2,
+  "LoadSync": true,
+  "LoadPriority": 69421,
+  "Punchline": "Battle with others in a game of skill and luck.",
+  "AcceptsFeedback": true
+}
