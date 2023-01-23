@@ -59,7 +59,7 @@ jobs:
 
     steps:
        - name: Write out repo.json
-         run:
+         run: |
             $ver = '${{ github.ref }}'
             $path = './SamplePlugin/repo.json'
             $new_path = './repo1.json'
