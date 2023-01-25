@@ -200,7 +200,7 @@ namespace ModBattles
             [RequiredVersion("1.0")] DalamudPluginInterface pluginInterface,
             [RequiredVersion("1.0")] CommandManager commandManager, ClientState clientState, Framework framework)
         {
-            PluginLog.Log("Small Change to test");
+            
             PluginInterface = pluginInterface;
             CommandManager = commandManager;
             ClientState = clientState;
