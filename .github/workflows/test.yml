@@ -3,7 +3,7 @@ name: Create Release
 on:
   push:
     tags-ignore:
-      - v*
+      - t*
 jobs:
   build:
     runs-on: windows-latest
