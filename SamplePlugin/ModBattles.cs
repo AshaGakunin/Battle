@@ -279,7 +279,7 @@ namespace ModBattles
             //PluginLog.Log(battle.you.ActionDecode(test));
             WindowSystem.AddWindow(new ConfigWindow(this));
 
-
+            //test
 
             CommandManager.AddHandler(CommandName, new CommandInfo(OnCommand)
             {
