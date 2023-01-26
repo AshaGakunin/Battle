@@ -1,9 +1,10 @@
 name: Create Release
 
 on:
-  push:
-    tags-ignore:
-      - t*
+  workflow_dispatch:
+#   push:
+#     tags-ignore:
+#       - t*
 jobs:
   build:
     runs-on: windows-latest
