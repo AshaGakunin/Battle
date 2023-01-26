@@ -28,17 +28,17 @@ jobs:
       - name: write version into json
         run: |
           $ver = '${{ github.ref_name }}' -replace 'refs/tags/',''
-          $path = './SamplePlugin/bin/Release/ModBattles.json'
+          $path = './SamplePlugin/bin/x64/Release/ModBattles.json'
           $content = get-content -path $path
           $content = $content -replace '1.0.0.0',$ver
           set-content -Path $path -Value $content
       - name: Archive
-        run: Compress-Archive -Path SamplePlugin/bin/Release/* -DestinationPath latest.zip
+        run: Compress-Archive -Path SamplePlugin/bin/x64/Release/* -DestinationPath latest.zip
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.1
         with:
           path: |
-            ./SamplePlugin/bin/Release/*
+            ./SamplePlugin/bin/x64/Release/*
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
