@@ -33,7 +33,7 @@ jobs:
           $content = $content -replace '1.0.0.0',$ver
           set-content -Path $path -Value $content
       - name: Archive
-        run: Compress-Archive -Path SamplePlugin/bin/x64/Release/* -DestinationPath latest.zip
+        run: Compress-Archive -Path SamplePlugin/bin/x64/Release/* -DestinationPath latestr.zip
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.1
         with:
