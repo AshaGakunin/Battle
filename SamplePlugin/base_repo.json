@@ -19,9 +19,9 @@
         "LoadPriority": 69421,
         "LoadRequiredState": 2,
         "LoadSync": true,
-        "DownloadLinkInstall": "https://github.com/AshaGakunin/Battle/releases/download/v1.0.0.0/latest.zip",
-        "DownloadLinkTesting": "https://github.com/AshaGakunin/Battle/releases/download/v1.0.0.0/latest.zip",
-        "DownloadLinkUpdate": "https://github.com/AshaGakunin/Battle/releases/download/v1.0.0.0/latest.zip"
+        "DownloadLinkInstall": "https://github.com/AshaGakunin/Battle/releases/download/v1.0.0.0/latestr.zip",
+        "DownloadLinkTesting": "https://github.com/AshaGakunin/Battle/releases/download/v1.0.0.0/latestr.zip",
+        "DownloadLinkUpdate": "https://github.com/AshaGakunin/Battle/releases/download/v1.0.0.0/latestr.zip"
 
     }
 ]
