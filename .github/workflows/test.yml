@@ -28,17 +28,17 @@ jobs:
       - name: write version into json
         run: |
           $ver = '${{ github.ref_name }}' -replace 'refs/tags/',''
-          $path = './Penumbra/bin/Release/Penumbra.json'
+          $path = './SamplePlugin/bin/Release/ModBattles.json'
           $content = get-content -path $path
           $content = $content -replace '1.0.0.0',$ver
           set-content -Path $path -Value $content
       - name: Archive
-        run: Compress-Archive -Path Penumbra/bin/Release/* -DestinationPath Penumbra.zip
+        run: Compress-Archive -Path SamplePlugin/bin/Release/* -DestinationPath latest.zip
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.1
         with:
           path: |
-            ./Penumbra/bin/Release/*
+            ./SamplePlugin/bin/Release/*
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -46,7 +46,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref }}
-          release_name: Penumbra ${{ github.ref }}
+          release_name: ModBattles ${{ github.ref }}
           draft: false
           prerelease: false
       - name: Upload Release Asset
@@ -56,15 +56,15 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
-          asset_path: ./Penumbra.zip
-          asset_name: Penumbra.zip
+          asset_path: ./latest.zip
+          asset_name: latest.zip
           asset_content_type: application/zip
 
       - name: Write out repo.json
         run: |
           $ver = '${{ github.ref }}' -replace 'refs/tags/',''
-          $path = './base_repo.json'
-          $new_path = './repo.json'
+          $path = './SamplePlugin/base_repo.json'
+          $new_path = './SamplePlugin/repo.json'
           $content = get-content -path $path
           $content = $content -replace '1.0.0.0',$ver
           set-content -Path $new_path -Value $content
