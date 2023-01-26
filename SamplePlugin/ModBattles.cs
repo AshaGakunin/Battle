@@ -298,7 +298,7 @@ namespace ModBattles
         {
             DirectoryInfo dir = new DirectoryInfo(sourceDirName);
             DirectoryInfo[] dirs = dir.GetDirectories();
-            //1.0.9.1
+            //1.0.9.2
             // If the source directory does not exist, throw an exception.
             if (!dir.Exists)
             {
