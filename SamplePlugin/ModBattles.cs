@@ -219,7 +219,6 @@ namespace ModBattles
 
 
 
-            //test
             //ClientState.TerritoryType
 
             //PluginLog.Log(PGetModDirectory.Invoke().ToString());
@@ -246,10 +245,7 @@ namespace ModBattles
             PRemoveMod = Ipc.RemoveTemporaryMod.Subscriber(PluginInterface);
             PAddDirectory = Ipc.AddMod.Subscriber(PluginInterface);
             PenumbraDirectory = PGetModDirectory.Invoke();
-            //PluginLog.Log();
-
-
-            //WriteResourceToFile()
+           
 
             // Building Redirect Paths
 
@@ -266,7 +262,7 @@ namespace ModBattles
             DirectoryCopy(PluginInterface.AssemblyLocation.Directory?.FullName!+"/Resources", @PenumbraDirectory.ToString()+"\\MBR", false);
            
 
-            //fuckyou(Ipc.GetPlayerMetaManipulations.Subscriber(PluginInterface).Invoke());
+            
             for (int i = 0; i < 101; i++)
             {
                 AllHpBars.Add(i, PenumbraDirectory+("/MBR/hp" + i.ToString() + ".avfx").Replace("/", "\\"));
@@ -275,8 +271,7 @@ namespace ModBattles
             {
                 PluginLog.Log(items.Value);
             }
-            //var goatImage = PluginInterface.UiBuilder.LoadImage(imagePath);
-            //PluginLog.Log(battle.you.ActionDecode(test));
+            
             WindowSystem.AddWindow(new ConfigWindow(this));
 
            
@@ -292,13 +287,13 @@ namespace ModBattles
 
        
             
-        //test
+        
         private static void DirectoryCopy(
             string sourceDirName, string destDirName, bool copySubDirs)
         {
             DirectoryInfo dir = new DirectoryInfo(sourceDirName);
             DirectoryInfo[] dirs = dir.GetDirectories();
-            //1.0.9.2
+          
             // If the source directory does not exist, throw an exception.
             if (!dir.Exists)
             {
@@ -425,17 +420,7 @@ namespace ModBattles
                 }
                 
             }
-            //PluginLog.Log(sender.ToString());
-            //PluginLog.Log("I have changed territory");
-            //battle = new Battle();
-            //PluginLog.Log("New Battle Created: " + battle.you.Name);
-            //battle.you.Name = "test";
-            //PluginLog.Log(Obj[0].Name.ToString() + " this should be active");
-            //battle.you.Name = Obj[0].Name.ToString();
-            //PlayerCharacter ThisPlayer = (PlayerCharacter)ModBattles.Obj[0];
-            //battle.you.HomeWorld = ThisPlayer.HomeWorld.GameData.Name.ToString();
-            //battle.you.Tell = "/t " + battle.you.Name + "@" + battle.you.HomeWorld;
-            //throw new NotImplementedException();
+           
         }
 
         public void Dispose()
@@ -460,44 +445,7 @@ namespace ModBattles
             WindowSystem.GetWindow("Battle UI").IsOpen = true;
 
         }
-        //public static void dfu(string arg)
-        //{
-
-        //    var path = @"c:\temp\fileName2.zip";
-        //    byte[] zipBytes = Convert.FromBase64String(arg);
-        //    using (FileStream fs = new FileStream(path, FileMode.Create))
-        //    {
-        //        fs.Write(zipBytes, 0, zipBytes.Length);
-        //    }
-
-
-        //}
-        //public static string fuckyou(string arg)
-        //{
-        //    var path = @"c:\temp\import.zip";
-        //    //var path = @arg.Replace("/", "\\");
-        //    string base64 = "";
-
-        //    using (FileStream zip = new FileStream(path, FileMode.Open))
-        //    {
-        //        var zipBytes = new byte[zip.Length];
-        //        zip.Read(zipBytes, 0, (int)zip.Length);
-        //        base64 = Convert.ToBase64String(zipBytes);
-        //    }
-        //    return base64; 
-        //}
-        //public void wtf(string m, string f)
-        //{
-        //    string docPath =@"c:\temp\";
-
-        //    // Write the string array to a new file named "WriteLines.txt".
-        //    using (StreamWriter outputFile = new StreamWriter(Path.Combine(docPath, f)))
-        //    {
-
-        //        outputFile.WriteLine(m);
-        //    }
-
-        //}
+       
 
         private void DrawUI()
         {
