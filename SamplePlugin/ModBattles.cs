@@ -264,7 +264,7 @@ namespace ModBattles
             //Water = Path.Combine(PluginInterface.AssemblyLocation.Directory?.FullName!, "Resources/water.atex").Replace("/", "\\\\");
             Water = PenumbraDirectory + ("/MBR/water.atex").Replace("/", "\\");
             DirectoryCopy(PluginInterface.AssemblyLocation.Directory?.FullName!+"/Resources", @PenumbraDirectory.ToString()+"\\MBR", false);
-            //uginLog.Log(imagePath);
+           
 
             //fuckyou(Ipc.GetPlayerMetaManipulations.Subscriber(PluginInterface).Invoke());
             for (int i = 0; i < 101; i++)
