@@ -78,9 +78,9 @@ public sealed class ConfigWindow : Window, IDisposable
 
     public override unsafe void Draw()
     {
-        if (ModBattles.ClientState.LocalPlayer.CurrentWorld.GameData.Name == "Gilgamesh")
+        if (ModBattles.ValidWorlds.Contains(ModBattles.ClientState.LocalPlayer.CurrentWorld.GameData.Name))
         {
-            if (ModBattles.ClientState.TerritoryType.ToString() == "650" || ModBattles.ClientState.TerritoryType.ToString() == "652" || ModBattles.ClientState.TerritoryType.ToString() == "608")
+            if (ModBattles.ValidZones.Contains(ModBattles.ClientState.TerritoryType))
             {
                 var lengthObjOut = ModBattles.Obj.Length;
                 var logout = "";

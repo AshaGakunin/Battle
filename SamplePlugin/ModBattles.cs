@@ -96,6 +96,9 @@ namespace ModBattles
         public static string HpBarOutLine = "";
         public static string HpBarBar = "";
         public static string Water = "";
+
+        public static List<string> ValidWorlds=new List<string>();
+        public static List<int> ValidZones = new List<int>();
         private void OnChatMessage(XivChatType type, uint id, ref SeString sender, ref SeString message, ref bool handled)
         {
             //Oppnent not confirmed
@@ -216,8 +219,13 @@ namespace ModBattles
             }
 
 
-
-
+            //setting up valid worlds
+            ValidWorlds.Add("Gligamesh");
+            //setting up valid zones
+            ValidZones.Add(651);
+            ValidZones.Add(284);
+            ValidZones.Add(384);
+            ValidZones.Add(608);
 
             //ClientState.TerritoryType
 
@@ -369,9 +377,9 @@ namespace ModBattles
         public void StartBattle()
         {
             battle = new Battle();
-            if (ClientState.LocalPlayer.CurrentWorld.GameData.Name == "Gilgamesh")
+            if (ValidWorlds.Contains(ClientState.LocalPlayer.CurrentWorld.GameData.Name))
             {
-                if (ClientState.TerritoryType.ToString() == "650" || ClientState.TerritoryType.ToString() == "652" || ClientState.TerritoryType.ToString() == "608")
+                if (ValidZones.Contains(ClientState.TerritoryType))
                 {
                     //PluginLog.Log(ClientState.TerritoryType);
                     battle.you.Name = Obj[0].Name.ToString();
