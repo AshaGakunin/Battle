@@ -171,7 +171,7 @@ namespace ModBattles
                                 // PluginLog.Log(type.ToString()+" This should be TellIncomming") ;
                                 ActionRecieved = true;
                                 battle.SetOpponentAction(0, 0, B[1], battle.oppenent, "oppnent action");
-                                handled = true;
+                                //handled = true;
                             }
 
 
