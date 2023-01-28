@@ -78,7 +78,7 @@ public sealed class ConfigWindow : Window, IDisposable
 
     public override unsafe void Draw()
     {
-        if (ModBattles.ValidWorlds.Contains(ModBattles.ClientState.LocalPlayer.CurrentWorld.GameData.Name))
+        if (ModBattles.ValidWorlds.Contains(ModBattles.ClientState.LocalPlayer.CurrentWorld.GameData.Name.ToString()))
         {
             if (ModBattles.ValidZones.Contains(ModBattles.ClientState.TerritoryType))
             {

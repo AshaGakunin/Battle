@@ -220,7 +220,7 @@ namespace ModBattles
 
 
             //setting up valid worlds
-            ValidWorlds.Add("Gligamesh");
+            ValidWorlds.Add("Gilgamesh");
             //setting up valid zones
             ValidZones.Add(651);
             ValidZones.Add(284);
@@ -377,7 +377,8 @@ namespace ModBattles
         public void StartBattle()
         {
             battle = new Battle();
-            if (ValidWorlds.Contains(ClientState.LocalPlayer.CurrentWorld.GameData.Name))
+            //PluginLog.Log(ClientState.LocalPlayer.CurrentWorld.GameData.Name + " vs " + ValidWorlds.Contains(ClientState.LocalPlayer.CurrentWorld.GameData.Name.ToString()));
+            if (ValidWorlds.Contains(ClientState.LocalPlayer.CurrentWorld.GameData.Name.ToString()))
             {
                 if (ValidZones.Contains(ClientState.TerritoryType))
                 {
@@ -386,7 +387,7 @@ namespace ModBattles
                     PlayerCharacter ThisPlayer = (PlayerCharacter)ModBattles.Obj[0];
                     battle.you.HomeWorld = ThisPlayer.HomeWorld.GameData.Name.ToString();
                     battle.you.Tell = "/t " + battle.you.Name + "@" + battle.you.HomeWorld;
-                    battle.you.Emote= new Tuple<string, string>("chara/action/emote/goodbye_st.tmb", "/wave");
+                    //battle.you.Emote= new Tuple<string, string>("chara/action/emote/goodbye_st.tmb", "/wave");
                     //emote refrence
                     //chara/action/emote/goodbye.tmb /goodbye
                 }
