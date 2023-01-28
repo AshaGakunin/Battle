@@ -508,6 +508,7 @@ public sealed class ConfigWindow : Window, IDisposable
                             PlayerCharacter ThisPlayer = (PlayerCharacter)ModBattles.Obj[0];
                             ModBattles.battle.you.HomeWorld = ThisPlayer.HomeWorld.GameData.Name.ToString();
                             ModBattles.battle.you.Tell = "/t " + ModBattles.battle.you.Name + "@" + ModBattles.battle.you.HomeWorld;
+                            ModBattles.battle.you.FReady = false;
                         }
                         ImGui.PopStyleColor();
                     }

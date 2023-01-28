@@ -680,7 +680,7 @@ namespace ModBattles
             {
                 PluginLog.Log("Something fucked up");
             }
-            if (ModBattles.battle.oppenent.FReady && ModBattles.battle.oppenent.FReady)
+            if (ModBattles.battle.oppenent.FReady && ModBattles.battle.you.FReady)
             {
                 PluginLog.Log("Will Fire Once due to your action " + ModBattles.ActionRecieved);
                 ModBattles.battle.Fight(ModBattles.battle);
@@ -696,6 +696,7 @@ namespace ModBattles
         }
         public void SetOpponentAction(int type, int roll, string OppnentAction, fighter target, string location)
         {
+            PluginLog.Log("Setting opponent action");
             if (ModBattles.ActionRecieved == true)
             {
                 PluginLog.Log("Setting opponent action" + ModBattles.battle.you.Health + location + ModBattles.ActionRecieved);
@@ -712,7 +713,7 @@ namespace ModBattles
                 ModBattles.battle.oppenent.CurrentAction.Instakill = bool.Parse(A[7]);
                 ModBattles.battle.oppenent.FReady = true;
 
-                if (ModBattles.battle.oppenent.FReady && ModBattles.battle.oppenent.FReady)
+                if (ModBattles.battle.oppenent.FReady && ModBattles.battle.you.FReady)
                 {
                     PluginLog.Log("Will Fire Once due to opponent " + ModBattles.ActionRecieved);
                     ModBattles.battle.Fight(ModBattles.battle);

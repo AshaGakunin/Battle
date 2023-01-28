@@ -169,6 +169,7 @@ namespace ModBattles
                             if (!ActionRecieved)
                             {
                                 // PluginLog.Log(type.ToString()+" This should be TellIncomming") ;
+                                PluginLog.Log(battle.you.FReady.ToString() + " READY STATUS");
                                 ActionRecieved = true;
                                 battle.SetOpponentAction(0, 0, B[1], battle.oppenent, "oppnent action");
                                 //handled = true;
@@ -182,6 +183,7 @@ namespace ModBattles
                     else
                     {
 
+                        
                         //handled = true;
                     }
                 }
@@ -387,6 +389,7 @@ namespace ModBattles
                     PlayerCharacter ThisPlayer = (PlayerCharacter)ModBattles.Obj[0];
                     battle.you.HomeWorld = ThisPlayer.HomeWorld.GameData.Name.ToString();
                     battle.you.Tell = "/t " + battle.you.Name + "@" + battle.you.HomeWorld;
+                    battle.you.FReady = false;
                     //battle.you.Emote= new Tuple<string, string>("chara/action/emote/goodbye_st.tmb", "/wave");
                     //emote refrence
                     //chara/action/emote/goodbye.tmb /goodbye
