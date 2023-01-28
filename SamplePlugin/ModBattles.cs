@@ -387,6 +387,7 @@ namespace ModBattles
                     battle.you.HomeWorld = ThisPlayer.HomeWorld.GameData.Name.ToString();
                     battle.you.Tell = "/t " + battle.you.Name + "@" + battle.you.HomeWorld;
                     battle.you.Emote= new Tuple<string, string>("chara/action/emote/goodbye_st.tmb", "/wave");
+                    //emote refrence
                     //chara/action/emote/goodbye.tmb /goodbye
                 }
 
