@@ -219,7 +219,7 @@ namespace ModBattles
 
 
 
-
+            //test
             //ClientState.TerritoryType
 
             //PluginLog.Log(PGetModDirectory.Invoke().ToString());
