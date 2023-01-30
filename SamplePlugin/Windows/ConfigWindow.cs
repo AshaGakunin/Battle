@@ -302,7 +302,7 @@ public sealed class ConfigWindow : Window, IDisposable
                 //Your Stats
                 {
                     ImGui.BeginChild("ChildYou", new Vector2(ImGui.GetContentRegionAvail().X * 0.5f, ImGui.GetContentRegionAvail().Y * 0.9f));
-                    if (ModBattles.ActionRecieved)
+                    if (ModBattles.ActionRecieved && !ModBattles.battle.you.FReady)
                     {
                         ImGui.Text("Ready yourself for the next round");
                     }
