@@ -284,16 +284,16 @@ public sealed class ConfigWindow : Window, IDisposable
 
                     //}
                 }
-                if (ModBattles.ActionRecieved && ModBattles.PlayerReady)
-                {
+                //if (ModBattles.ActionRecieved && ModBattles.PlayerReady)
+                //{
 
-                    if (ImGui.Button("Ready for next Round"))
-                    {
-                        ModBattles.PlayerReady = false; 
-                        ModBattles.ActionRecieved = false;
+                //    if (ImGui.Button("Ready for next Round"))
+                //    {
+                //        ModBattles.PlayerReady = false; 
+                //        ModBattles.ActionRecieved = false;
 
-                    }
-                }
+                //    }
+                //}
 
                 ImGui.NewLine();
 
@@ -302,7 +302,7 @@ public sealed class ConfigWindow : Window, IDisposable
                 //Your Stats
                 {
                     ImGui.BeginChild("ChildYou", new Vector2(ImGui.GetContentRegionAvail().X * 0.5f, ImGui.GetContentRegionAvail().Y * 0.9f));
-                    if (ModBattles.ActionRecieved && !ModBattles.battle.you.FReady)
+                    if (ModBattles.ActionRecieved && ModBattles.battle.you.FReady)
                     {
                         ImGui.Text("Ready yourself for the next round");
                     }
@@ -509,6 +509,7 @@ public sealed class ConfigWindow : Window, IDisposable
                             ModBattles.battle.you.HomeWorld = ThisPlayer.HomeWorld.GameData.Name.ToString();
                             ModBattles.battle.you.Tell = "/t " + ModBattles.battle.you.Name + "@" + ModBattles.battle.you.HomeWorld;
                             ModBattles.battle.you.FReady = false;
+                            ModBattles.ActionRecieved = false;
                         }
                         ImGui.PopStyleColor();
                     }

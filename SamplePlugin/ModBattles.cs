@@ -174,6 +174,10 @@ namespace ModBattles
                                 battle.SetOpponentAction(0, 0, B[1], battle.oppenent, "oppnent action");
                                 //handled = true;
                             }
+                            else
+                            {
+                                PluginLog.Log(ActionRecieved.ToString() + "  an action has already been recieved");
+                            }
 
 
                             //PluginLog.Log("Opponent Action Registered");
@@ -182,8 +186,18 @@ namespace ModBattles
                     }
                     else
                     {
+                        PluginLog.Log("Out Going Attack");
+                        if (battle.oppenent.FReady && battle.you.FReady)
+                        {
 
-                        
+                            PluginLog.Log("Will Fire Once due to your action " + ActionRecieved);
+                            battle.Fight(battle);
+                        }
+                        else
+                        {
+                            PluginLog.Log("is not firing your action" + ActionRecieved);
+                        }
+
                         //handled = true;
                     }
                 }
@@ -390,6 +404,7 @@ namespace ModBattles
                     battle.you.HomeWorld = ThisPlayer.HomeWorld.GameData.Name.ToString();
                     battle.you.Tell = "/t " + battle.you.Name + "@" + battle.you.HomeWorld;
                     battle.you.FReady = false;
+                    ActionRecieved = false;
                     //battle.you.Emote= new Tuple<string, string>("chara/action/emote/goodbye_st.tmb", "/wave");
                     //emote refrence
                     //chara/action/emote/goodbye.tmb /goodbye

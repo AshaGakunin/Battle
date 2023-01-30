@@ -31,6 +31,11 @@ namespace ModBattles
 
 
         }
+
+        public async Task wrd(int wait, string tell)
+        {
+
+        }
         public async Task<bool> test1(int wait)
         {
             Thread.Sleep(wait);
@@ -498,7 +503,7 @@ namespace ModBattles
                 string sendactione = ActionEncode(sendactonraw);
                 var run = RaptureShellModule.Instance;
                 var macroModule = RaptureMacroModule.Instance;
-                var macro = macroModule->GetMacro(0, 0);
+                var macro = macroModule->GetMacro(0, 1);
                 string challenge = ModBattles.battle.oppenent.Tell + " A||" + sendactione + "||" + ModBattles.battle.you.HomeWorld;
 
                 var newStr = Utf8String.FromString(challenge);
@@ -583,7 +588,7 @@ namespace ModBattles
                 string sendactione = ActionEncode(sendactonraw);
                 var run = RaptureShellModule.Instance;
                 var macroModule = RaptureMacroModule.Instance;
-                var macro = macroModule->GetMacro(0, 0);
+                var macro = macroModule->GetMacro(0, 1);
                 string challenge = ModBattles.battle.oppenent.Tell + " A||" + sendactione + "||" + ModBattles.battle.you.HomeWorld;
 
                 var newStr = Utf8String.FromString(challenge);
@@ -664,31 +669,24 @@ namespace ModBattles
                 target.CurrentAction.Instakill = instakill;
                 string sendactonraw = target.CurrentAction.Type.ToString() + "|" + target.CurrentAction.Damage.ToString() + "|" + target.CurrentAction.Defense.ToString() + "|" + target.CurrentAction.DefenseTurns.ToString() + "|" + target.CurrentAction.Heal.ToString() + "|" + target.CurrentAction.Invuln.ToString() + "|" + target.CurrentAction.InvulnTurns.ToString() + "|" + target.CurrentAction.Instakill.ToString();
                 string sendactione = ActionEncode(sendactonraw);
+                
+                string challenge = ModBattles.battle.oppenent.Tell + " A||" + sendactione + "3||" + ModBattles.battle.you.HomeWorld;
                 var run = RaptureShellModule.Instance;
                 var macroModule = RaptureMacroModule.Instance;
-                var macro = macroModule->GetMacro(0, 0);
-                string challenge = ModBattles.battle.oppenent.Tell + " A||" + sendactione + "||" + ModBattles.battle.you.HomeWorld;
-
+                var macro = macroModule->GetMacro(0, 1);
                 var newStr = Utf8String.FromString(challenge);
                 macroModule->ReplaceMacroLines(macro, newStr);
                 newStr->Dtor();
                 IMemorySpace.Free(newStr);
                 run->ExecuteMacro(macro);
+               
                 target.FReady = true;
             }
             else
             {
                 PluginLog.Log("Something fucked up");
             }
-            if (ModBattles.battle.oppenent.FReady && ModBattles.battle.you.FReady)
-            {
-                PluginLog.Log("Will Fire Once due to your action " + ModBattles.ActionRecieved);
-                ModBattles.battle.Fight(ModBattles.battle);
-            }
-            else
-            {
-                PluginLog.Log("is not firing your action" + ModBattles.ActionRecieved);
-            }
+            
 
 
 
@@ -697,8 +695,8 @@ namespace ModBattles
         public void SetOpponentAction(int type, int roll, string OppnentAction, fighter target, string location)
         {
             PluginLog.Log("Setting opponent action");
-            if (ModBattles.ActionRecieved == true)
-            {
+            //if (ModBattles.ActionRecieved == true)
+           // {
                 PluginLog.Log("Setting opponent action" + ModBattles.battle.you.Health + location + ModBattles.ActionRecieved);
                 ModBattles.ActionRecieved = true;
                 string rawaction = ActionDecode(OppnentAction);
@@ -722,7 +720,7 @@ namespace ModBattles
                 {
                     PluginLog.Log("is not firing opponent action " + ModBattles.ActionRecieved);
                 }
-            }
+           // }
             
         }
         public class Action
