@@ -96,6 +96,7 @@ namespace ModBattles
         public static string HpBarOutLine = "";
         public static string HpBarBar = "";
         public static string Water = "";
+        public static Dictionary<int, Dictionary<string, string>> InstaKills = new Dictionary<int,Dictionary<string,string>>();
 
         public static List<string> ValidWorlds=new List<string>();
         public static List<int> ValidZones = new List<int>();
@@ -230,9 +231,7 @@ namespace ModBattles
             ClientState.Login += ClientState_Login;
             ClientState.TerritoryChanged += ClientState_TerritoryChanged;
 
-            if (clientState.IsLoggedIn) {
-                StartBattle();
-            }
+            
 
 
             //setting up valid worlds
@@ -243,9 +242,13 @@ namespace ModBattles
             ValidZones.Add(384);
             ValidZones.Add(608);
 
-            //ClientState.TerritoryType
+            if (clientState.IsLoggedIn)
+            {
+                StartBattle();
+            }
+            
 
-            //PluginLog.Log(PGetModDirectory.Invoke().ToString());
+            
             /// <summary>
             /// Set a temporary mod with the given paths, manipulations and priority and the name tag to a specific collection.
             /// </summary>
@@ -257,7 +260,7 @@ namespace ModBattles
             /// <returns>CollectionMissing, InvalidGamePath, InvalidManipulation or Success.</returns>
             /// public PenumbraApiEc AddTemporaryMod( string tag, string collectionName, Dictionary< string, string > paths, string manipString,
             //int priority );
-            
+
             //Setting Up Penubmra Api
             PTempMod = Penumbra.Api.Ipc.AddTemporaryMod.Subscriber(PluginInterface);
             Predraw = Penumbra.Api.Ipc.RedrawObject.Subscriber(PluginInterface);
@@ -273,20 +276,13 @@ namespace ModBattles
 
             // Building Redirect Paths
 
+            //Setting up hp bar
             HpBarManips = "H4sIAAAAAAAACkWPPQ+CMBCG/S03d8AvBjaMJDIYTVAX41BoTapwxXKNEsJ/t0XU7e1z7z2XTs4dHNpaQgRpVQCDLUdV25KT0ghRBwmSaX2IiYzKLckYRaYtCoimwWzuN0gaxcvUEwZrWXxywOB0ffm0/JdiVNXgHhs/65Y3969x0A+FnsHeuA3T+mcYhAs3lYVGMSJ/hDsx0nB8l99kQeOHkodVdSXdiH1yVmpXgw1H0Ti20qId0RHvqJ/o4ImXynnJWNn3lzesBRT+HwEAAA==\r\n";
-            var hps = Path.Combine(PluginInterface.AssemblyLocation.Directory?.FullName!, "Resources/hpbarstart.avfx");
-            //HpBar = Path.Combine(PluginInterface.AssemblyLocation.Directory?.FullName!, "hpbar.avfx").Replace("/","\\");
-            //HpBarStart = hps.Replace("/", "\\");
-            //HpBarOutLine = Path.Combine(PluginInterface.AssemblyLocation.Directory?.FullName!, "Resources/hpoutline.atex").Replace("/", "\\\\");
             HpBarOutLine = PenumbraDirectory + ("/MBR/hpoutline.atex").Replace("/", "\\");
-            //HpBarBar = Path.Combine(PluginInterface.AssemblyLocation.Directory?.FullName!, "Resources/hpbar.atex").Replace("/", "\\\\");
             HpBarBar = PenumbraDirectory + ("/MBR/hpbar.atex").Replace("/", "\\");
-            //Water = Path.Combine(PluginInterface.AssemblyLocation.Directory?.FullName!, "Resources/water.atex").Replace("/", "\\\\");
             Water = PenumbraDirectory + ("/MBR/water.atex").Replace("/", "\\");
+            //var hps = Path.Combine(PluginInterface.AssemblyLocation.Directory?.FullName!, "Resources/hpbarstart.avfx");
             DirectoryCopy(PluginInterface.AssemblyLocation.Directory?.FullName!+"/Resources", @PenumbraDirectory.ToString()+"\\MBR", false);
-           
-
-            
             for (int i = 0; i < 101; i++)
             {
                 AllHpBars.Add(i, PenumbraDirectory+("/MBR/hp" + i.ToString() + ".avfx").Replace("/", "\\"));
@@ -295,7 +291,39 @@ namespace ModBattles
             {
                 PluginLog.Log(items.Value);
             }
-            
+
+            //Setting Up Instakill Paths
+            //tD.Add(target.Emote.Item1, );
+
+            //tD.Add("vfx/camera/eff/lbk_drk_lv3.avfx", "vfx\\emote_sp\\nage_kiss\\Oglb3\\lbk_drk_lv3(swirls changed).avfx");
+            //tD.Add("vfx/limitbreak/lbk_2sw_lv3/eff/lbk_2sw_lv3_c0s.avfx", "vfx\\emote_sp\\nage_kiss\\Oglb3\\lbk_2sw_lv3_c1s(shimery changed).avfx");
+            //tD.Add("vfx/limitbreak/lbk_2sw_lv3/eff/lbk_2sw_lv3_c2s.avfx", "\"vfx\\\\emote_sp\\\\nage_kiss\\\\Oglb3\\\\lbk_2sw_lv3_c2s(stupid sword).avfx");
+            //tD.Add("vfx/limitbreak/lbk_2sw_lv3/eff/lbk_2sw_lv3_c3s.avfx", "vfx\\emote_sp\\nage_kiss\\Oglb3\\lbk_2sw_lv3_c3s(better swipe).avfx");
+
+            //tD.Add("vfx/limitbreak/lbk_2sw_lv3/texture/gr01as.atex", "vfx\\emote_sp\\nage_kiss\\texture\\oglogo.atex");
+            //tD.Add("vfx/limitbreak/lbk_2sw_lv3/eff/lbk_2sw_lv3_c6s.avfx", "vfx\\emote_sp\\nage_kiss\\Oglb3\\lbk_2sw_lv3_c6s(white floor).avfx");
+            //tD.Add("vfx/limitbreak/lbk_2sw_lv3/eff/lbk_2sw_lv3_c4s.avfx", "vfx\\emote_sp\\nage_kiss\\Oglb3\\bk_2sw_lv3_c4s(golddrip).avfx");
+            //tD.Add("vfx/limitbreak/lbk_2sw_lv3/eff/lbk_2sw_lv3_c5s.avfx", "vfx\\emote_sp\\nage_kiss\\Oglb3\\lbk_2sw_lv3_c5s(gold puddle).avfx");
+            //tD.Add("vfx/limitbreak/lbk_2sw_lv3/eff/lbk_2sw_lv3_c1s.avfx", "vfx\\emote_sp\\nage_kiss\\Oglb3\\lbk_2sw_lv3_c1s(bigog).avfx");
+            //tD.Add("vfx/limitbreak/lbk_2sw_lv3/eff/lbk_2sw_lv3_c8s.avfx", "vfx\\emote_sp\\nage_kiss\\Oglb3\\lbk_2sw_lv3_c8s(bigpattern).avfx");
+            Dictionary<string,string> oglist = new Dictionary<string,string>();
+            oglist.Add("filler", PenumbraDirectory + (" / MBR/instakill.tmb").Replace("/", "\\"));
+            oglist.Add("vfx/camera/eff/lbk_drk_lv3.avfx", PenumbraDirectory + ("/MBR/lbk_drk_lv3(swirls changed).avfx").Replace("/", "\\"));
+            oglist.Add("vfx/limitbreak/lbk_2sw_lv3/eff/lbk_2sw_lv3_c0s.avfx", PenumbraDirectory + ("/MBR/lbk_2sw_lv3_c1s(shimery changed).avfx").Replace("/", "\\"));
+            oglist.Add("vfx/limitbreak/lbk_2sw_lv3/eff/lbk_2sw_lv3_c2s.avfx", PenumbraDirectory + ("/MBR/lbk_2sw_lv3_c2s(stupid sword).avfx").Replace("/", "\\"));
+            oglist.Add("vfx/limitbreak/lbk_2sw_lv3/eff/lbk_2sw_lv3_c3s.avfx", PenumbraDirectory + ("/MBR/lbk_2sw_lv3_c3s(better swipe).avfx").Replace("/", "\\"));
+            oglist.Add("vfx/limitbreak/lbk_2sw_lv3/texture/gr01as.atex", PenumbraDirectory + ("/MBR/oglogo.atex").Replace("/", "\\"));
+            oglist.Add("vfx/limitbreak/lbk_2sw_lv3/eff/lbk_2sw_lv3_c6s.avfx", PenumbraDirectory + ("/MBR/lbk_2sw_lv3_c6s(white floor).avfx").Replace("/", "\\"));
+            oglist.Add("vfx/limitbreak/lbk_2sw_lv3/eff/lbk_2sw_lv3_c4s.avfx", PenumbraDirectory + ("/MBR/bk_2sw_lv3_c4s(golddrip).avfx").Replace("/", "\\"));
+            oglist.Add("vfx/limitbreak/lbk_2sw_lv3/eff/lbk_2sw_lv3_c5s.avfx", PenumbraDirectory + ("/MBR/lbk_2sw_lv3_c5s(gold puddle).avfx").Replace("/", "\\"));
+            oglist.Add("vfx/limitbreak/lbk_2sw_lv3/eff/lbk_2sw_lv3_c1s.avfx", PenumbraDirectory + ("/MBR/lbk_2sw_lv3_c1s(bigog).avfx").Replace("/", "\\"));
+            oglist.Add("vfx/limitbreak/lbk_2sw_lv3/eff/lbk_2sw_lv3_c8s.avfx", PenumbraDirectory + ("/MBR/lbk_2sw_lv3_c8s(bigpattern).avfx").Replace("/", "\\"));
+
+
+           
+
+            InstaKills.Add(0, oglist);
+
             WindowSystem.AddWindow(new ConfigWindow(this));
 
            
@@ -390,14 +418,27 @@ namespace ModBattles
             //throw new NotImplementedException();
 
         }
-        public void StartBattle()
+        public void StartBattle(string source="")
         {
             battle = new Battle();
+            if (source != "")
+            {
+                PluginLog.Log(source + " this is the source "+ClientState.LocalPlayer.CurrentWorld.GameData.Name.ToString());
+            }
+
             //PluginLog.Log(ClientState.LocalPlayer.CurrentWorld.GameData.Name + " vs " + ValidWorlds.Contains(ClientState.LocalPlayer.CurrentWorld.GameData.Name.ToString()));
             if (ValidWorlds.Contains(ClientState.LocalPlayer.CurrentWorld.GameData.Name.ToString()))
             {
+                if (source != "")
+                {
+                    PluginLog.Log(source + " World Valid");
+                }
                 if (ValidZones.Contains(ClientState.TerritoryType))
                 {
+                    if (source != "")
+                    {
+                        PluginLog.Log(source + " Zone Valid");
+                    }
                     //PluginLog.Log(ClientState.TerritoryType);
                     battle.you.Name = Obj[0].Name.ToString();
                     PlayerCharacter ThisPlayer = (PlayerCharacter)ModBattles.Obj[0];

@@ -663,6 +663,16 @@ namespace ModBattles
                     instakill = true;
                     target.CurrentAction.Type = 0;
                     target.CurrentAction.SelfTarget = false;
+                    string manip = "";
+                    var tD = new Dictionary<string, string>();
+                    //tmb
+                    tD = ModBattles.InstaKills[0];
+                    tD.Add(target.Emote.Item1, ModBattles.InstaKills[0]["filler"]);
+                    tD.Remove("filler");
+                    //ModBattles.InstaKills[0].Add(target.Emote.Item1, ModBattles.InstaKills[0]["filler"]);
+
+                    PluginLog.Log(ModBattles.PTempMod.Invoke("test", "Default", tD, manip, 0).ToString());
+                    ModBattles.Predraw.Invoke(ModBattles.Obj[0], RedrawType.Redraw);
 
                 }
                 target.CurrentAction.Damage = damage;
