@@ -190,7 +190,8 @@ namespace ModBattles
                             //handled = true;
                         }
                     }
-                    else if(B[0] == "B" && type.ToString() == "TellOutGoing")
+                    else 
+                    //if(B[0] == "A" && type.ToString() == "TellOutGoing")
                     {
                         PluginLog.Log("Out Going Attack");
                         if (battle.oppenent.FReady && battle.you.FReady)
@@ -206,10 +207,7 @@ namespace ModBattles
 
                         //handled = true;
                     }
-                    else
-                    {
-                        //should do nothing.
-                    }
+                    
                 }
 
                 //PluginLog.Log("confirmed " + message.ToString() + " " + sender.ToString());
@@ -317,7 +315,7 @@ namespace ModBattles
             //tD.Add("vfx/limitbreak/lbk_2sw_lv3/eff/lbk_2sw_lv3_c1s.avfx", "vfx\\emote_sp\\nage_kiss\\Oglb3\\lbk_2sw_lv3_c1s(bigog).avfx");
             //tD.Add("vfx/limitbreak/lbk_2sw_lv3/eff/lbk_2sw_lv3_c8s.avfx", "vfx\\emote_sp\\nage_kiss\\Oglb3\\lbk_2sw_lv3_c8s(bigpattern).avfx");
             Dictionary<string,string> oglist = new Dictionary<string,string>();
-            oglist.Add("filler", PenumbraDirectory + (" / MBR/instakill.tmb").Replace("/", "\\"));
+            oglist.Add("filler", PenumbraDirectory + ("/MBR/instakill.tmb").Replace("/", "\\"));
             oglist.Add("vfx/camera/eff/lbk_drk_lv3.avfx", PenumbraDirectory + ("/MBR/lbk_drk_lv3(swirls changed).avfx").Replace("/", "\\"));
             oglist.Add("vfx/limitbreak/lbk_2sw_lv3/eff/lbk_2sw_lv3_c0s.avfx", PenumbraDirectory + ("/MBR/lbk_2sw_lv3_c1s(shimery changed).avfx").Replace("/", "\\"));
             oglist.Add("vfx/limitbreak/lbk_2sw_lv3/eff/lbk_2sw_lv3_c2s.avfx", PenumbraDirectory + ("/MBR/lbk_2sw_lv3_c2s(stupid sword).avfx").Replace("/", "\\"));
@@ -333,6 +331,7 @@ namespace ModBattles
            
 
             InstaKills.Add(0, oglist);
+            ///PluginLog.Log(InstaKills[0]["filler"].ToString());
 
             WindowSystem.AddWindow(new ConfigWindow(this));
 

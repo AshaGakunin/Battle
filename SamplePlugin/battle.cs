@@ -27,6 +27,7 @@ namespace ModBattles
             ModBattles.battle.NextRound(ModBattles.battle.you);
             ModBattles.battle.NextRound(ModBattles.battle.oppenent);
             ModBattles.battle.sethp(ModBattles.battle.you.Health);
+            ModBattles.ActionRecieved = false;
             ModBattles.PlayerReady = true;
 
 
@@ -423,14 +424,24 @@ namespace ModBattles
         }
         public string ActionEncode(string plainText)
         {
-
+            
             var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
             return System.Convert.ToBase64String(plainTextBytes);
         }
         public string ActionDecode(string base64EncodedData)
         {
-            var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
-            return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
+            try
+            {
+                var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
+                return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
+            }
+            catch
+            {
+                PluginLog.Log("Error with this string => "+base64EncodedData);
+                return "false";
+            }
+            
+            
         }
         public void SetYourAction(int type, int roll, string OppnentAction, fighter target, string location)
         {
@@ -499,7 +510,7 @@ namespace ModBattles
                 target.CurrentAction.Heal = heal;
                 target.CurrentAction.Defense = -25;
                 target.CurrentAction.DefenseTurns = 1;
-                string sendactonraw = target.CurrentAction.Type.ToString() + "|" + target.CurrentAction.Damage.ToString() + "|" + target.CurrentAction.Defense.ToString() + "|" + target.CurrentAction.DefenseTurns.ToString() + "|" + target.CurrentAction.Heal.ToString() + "|" + target.CurrentAction.Invuln.ToString() + "|" + target.CurrentAction.InvulnTurns.ToString() + "|" + target.CurrentAction.Instakill.ToString();
+                string sendactonraw = target.CurrentAction.Type.ToString() + "=" + target.CurrentAction.Damage.ToString() + "=" + target.CurrentAction.Defense.ToString() + "=" + target.CurrentAction.DefenseTurns.ToString() + "=" + target.CurrentAction.Heal.ToString() + "=" + target.CurrentAction.Invuln.ToString() + "=" + target.CurrentAction.InvulnTurns.ToString() + "=" + target.CurrentAction.Instakill.ToString();
                 string sendactione = ActionEncode(sendactonraw);
                 var run = RaptureShellModule.Instance;
                 var macroModule = RaptureMacroModule.Instance;
@@ -605,7 +616,7 @@ namespace ModBattles
                 int damage = 0;
                 bool instakill = false;
                 //refulgant arrow 20-30 damage
-                if (roll <= 3)
+                if (roll <= 300)
                 {
                     var r = new Random();
                     damage = r.Next(10, 20);
@@ -618,7 +629,7 @@ namespace ModBattles
                     target.CurrentAction.SelfTarget = false;
                 }
                 //Paradox 30-40 defense 1-2 turns
-                else if (roll <= 7 && roll > 3)
+                else if (roll <= 700 && roll > 300)
                 {
                     var r = new Random();
                     damage = r.Next(20, 30);
@@ -631,7 +642,7 @@ namespace ModBattles
                     target.CurrentAction.SelfTarget = false;
                 }
                 //Communio 40-50 2 turns
-                else if (roll <= 9 && roll > 7)
+                else if (roll <= 989 && roll > 700)
                 {
                     
                     var r = new Random();
@@ -645,7 +656,7 @@ namespace ModBattles
                     target.CurrentAction.SelfTarget = false;
                 }
                 //Samurai lb3 100 damage
-                else if (roll <= 10 && roll > 9)
+                else if (roll <= 999 && roll > 989)
                 {
                     damage = 70;
                     target.CurrentAction.Type = 4;
@@ -666,9 +677,19 @@ namespace ModBattles
                     string manip = "";
                     var tD = new Dictionary<string, string>();
                     //tmb
-                    tD = ModBattles.InstaKills[0];
-                    tD.Add(target.Emote.Item1, ModBattles.InstaKills[0]["filler"]);
-                    tD.Remove("filler");
+                    //PluginLog.Log(ModBattles.InstaKills[0]["filler"]);
+                   
+                    tD.Add(target.Emote.Item1, ModBattles.PenumbraDirectory + ("/MBR/instakill.tmb").Replace("/", "\\"));
+                    tD.Add("vfx/camera/eff/lbk_drk_lv3.avfx", ModBattles.PenumbraDirectory + ("/MBR/lbk_drk_lv3(swirls changed).avfx").Replace("/", "\\"));
+                    tD.Add("vfx/limitbreak/lbk_2sw_lv3/eff/lbk_2sw_lv3_c0s.avfx", ModBattles.PenumbraDirectory + ("/MBR/lbk_2sw_lv3_c1s(shimery changed).avfx").Replace("/", "\\"));
+                    tD.Add("vfx/limitbreak/lbk_2sw_lv3/eff/lbk_2sw_lv3_c2s.avfx", ModBattles.PenumbraDirectory + ("/MBR/lbk_2sw_lv3_c2s(stupid sword).avfx").Replace("/", "\\"));
+                    tD.Add("vfx/limitbreak/lbk_2sw_lv3/eff/lbk_2sw_lv3_c3s.avfx", ModBattles.PenumbraDirectory + ("/MBR/lbk_2sw_lv3_c3s(better swipe).avfx").Replace("/", "\\"));
+                    tD.Add("vfx/limitbreak/lbk_2sw_lv3/texture/gr01as.atex", ModBattles.PenumbraDirectory + ("/MBR/oglogo.atex").Replace("/", "\\"));
+                    tD.Add("vfx/limitbreak/lbk_2sw_lv3/eff/lbk_2sw_lv3_c6s.avfx", ModBattles.PenumbraDirectory + ("/MBR/lbk_2sw_lv3_c6s(white floor).avfx").Replace("/", "\\"));
+                    tD.Add("vfx/limitbreak/lbk_2sw_lv3/eff/lbk_2sw_lv3_c4s.avfx", ModBattles.PenumbraDirectory + ("/MBR/bk_2sw_lv3_c4s(golddrip).avfx").Replace("/", "\\"));
+                    tD.Add("vfx/limitbreak/lbk_2sw_lv3/eff/lbk_2sw_lv3_c5s.avfx", ModBattles.PenumbraDirectory + ("/MBR/lbk_2sw_lv3_c5s(gold puddle).avfx").Replace("/", "\\"));
+                    tD.Add("vfx/limitbreak/lbk_2sw_lv3/eff/lbk_2sw_lv3_c1s.avfx", ModBattles.PenumbraDirectory + ("/MBR/lbk_2sw_lv3_c1s(bigog).avfx").Replace("/", "\\"));
+                    tD.Add("vfx/limitbreak/lbk_2sw_lv3/eff/lbk_2sw_lv3_c8s.avfx", ModBattles.PenumbraDirectory + ("/MBR/lbk_2sw_lv3_c8s(bigpattern).avfx").Replace("/", "\\"));
                     //ModBattles.InstaKills[0].Add(target.Emote.Item1, ModBattles.InstaKills[0]["filler"]);
 
                     PluginLog.Log(ModBattles.PTempMod.Invoke("test", "Default", tD, manip, 0).ToString());
@@ -710,7 +731,7 @@ namespace ModBattles
                 PluginLog.Log("Setting opponent action" + ModBattles.battle.you.Health + location + ModBattles.ActionRecieved);
                 ModBattles.ActionRecieved = true;
                 string rawaction = ActionDecode(OppnentAction);
-                string[] A = rawaction.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
+                string[] A = rawaction.Split(new char[] { '=' }, StringSplitOptions.RemoveEmptyEntries);
                 ModBattles.battle.oppenent.CurrentAction.Type = int.Parse(A[0]);
                 ModBattles.battle.oppenent.CurrentAction.Damage = int.Parse(A[1]);
                 ModBattles.battle.oppenent.CurrentAction.Defense = int.Parse(A[2], NumberStyles.AllowLeadingSign);
