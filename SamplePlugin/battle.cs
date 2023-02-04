@@ -605,7 +605,7 @@ namespace ModBattles
                 int damage = 0;
                 bool instakill = false;
                 //refulgant arrow 20-30 damage
-                if (roll <= 300)
+                if (roll <= 3)
                 {
                     var r = new Random();
                     damage = r.Next(10, 20);
@@ -618,7 +618,7 @@ namespace ModBattles
                     target.CurrentAction.SelfTarget = false;
                 }
                 //Paradox 30-40 defense 1-2 turns
-                else if (roll <= 750 && roll > 300)
+                else if (roll <= 7 && roll > 3)
                 {
                     var r = new Random();
                     damage = r.Next(20, 30);
@@ -631,7 +631,7 @@ namespace ModBattles
                     target.CurrentAction.SelfTarget = false;
                 }
                 //Communio 40-50 2 turns
-                else if (roll <= 989 && roll > 700)
+                else if (roll <= 9 && roll > 7)
                 {
                     
                     var r = new Random();
@@ -645,7 +645,7 @@ namespace ModBattles
                     target.CurrentAction.SelfTarget = false;
                 }
                 //Samurai lb3 100 damage
-                else if (roll <= 999 && roll > 989)
+                else if (roll <= 10 && roll > 9)
                 {
                     damage = 70;
                     target.CurrentAction.Type = 4;

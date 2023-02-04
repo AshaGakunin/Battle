@@ -39,6 +39,9 @@ using Lumina;
 //using Windows.Media.Protection;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
+using Lumina.Data.Parsing;
+using static System.Net.WebRequestMethods;
+using File = System.IO.File;
 
 
 //using ChatToAction.HubClient;
@@ -89,6 +92,8 @@ namespace ModBattles
         public static bool ActionRecieved = false;
 
         public static bool PlayerReady = true;
+
+        public static int ResourceVersion = 1;
 
         public static Battle battle = new Battle();
         public static Dictionary<int, string> AllHpBars = new Dictionary<int, string>();
@@ -163,7 +168,7 @@ namespace ModBattles
                 if (sender.ToString() == battle.oppenent.Name)
                 {
                     string[] B = message.ToString().Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
-                    if (B[0] == "A" && type.ToString() != "TellOutgoing")
+                    if (B[0] == "A" && type.ToString() == "TellIncoming")
                     {
                         if (B[2] == battle.oppenent.HomeWorld)
                         {
@@ -185,7 +190,7 @@ namespace ModBattles
                             //handled = true;
                         }
                     }
-                    else
+                    else if(B[0] == "B" && type.ToString() == "TellOutGoing")
                     {
                         PluginLog.Log("Out Going Attack");
                         if (battle.oppenent.FReady && battle.you.FReady)
@@ -200,6 +205,10 @@ namespace ModBattles
                         }
 
                         //handled = true;
+                    }
+                    else
+                    {
+                        //should do nothing.
                     }
                 }
 
@@ -282,6 +291,7 @@ namespace ModBattles
             HpBarBar = PenumbraDirectory + ("/MBR/hpbar.atex").Replace("/", "\\");
             Water = PenumbraDirectory + ("/MBR/water.atex").Replace("/", "\\");
             //var hps = Path.Combine(PluginInterface.AssemblyLocation.Directory?.FullName!, "Resources/hpbarstart.avfx");
+            
             DirectoryCopy(PluginInterface.AssemblyLocation.Directory?.FullName!+"/Resources", @PenumbraDirectory.ToString()+"\\MBR", false);
             for (int i = 0; i < 101; i++)
             {
@@ -360,6 +370,35 @@ namespace ModBattles
                 {
                     Directory.CreateDirectory(destDirName);
                 }
+                else
+                {
+                    DirectoryInfo dirtest = new DirectoryInfo(destDirName);
+                    PluginLog.Log("startup file check");
+                    FileInfo[] filestest = dirtest.GetFiles();
+                    bool check = false;
+                    string filetest = "rv" + ResourceVersion + ".txt";
+                    foreach(FileInfo file in filestest)
+                    {
+                        if (file.Name == filetest)
+                        {
+                            check = true;
+                            break;
+                        }
+                        
+                    }
+                    if (!check)
+                    {
+                        PluginLog.Log("no valid test file");
+                        foreach (FileInfo file in filestest)
+                        {
+                            PluginLog.Log("deleting file " + file.Name);
+                            file.Delete();
+
+                        }
+                       
+
+                    }
+                }
 
 
                 // Get the file contents of the directory to copy.
@@ -375,7 +414,7 @@ namespace ModBattles
                     {
                         file.CopyTo(temppath, false);
                     }
-                    
+
                 }
 
                 // If copySubDirs is true, copy the subdirectories.
