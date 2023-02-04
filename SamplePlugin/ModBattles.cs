@@ -105,6 +105,8 @@ namespace ModBattles
 
         public static List<string> ValidWorlds=new List<string>();
         public static List<int> ValidZones = new List<int>();
+
+        public static bool ActionDisabled=false;
         private void OnChatMessage(XivChatType type, uint id, ref SeString sender, ref SeString message, ref bool handled)
         {
             //Oppnent not confirmed

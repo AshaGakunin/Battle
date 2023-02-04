@@ -29,7 +29,7 @@ namespace ModBattles
             ModBattles.battle.sethp(ModBattles.battle.you.Health);
             ModBattles.ActionRecieved = false;
             ModBattles.PlayerReady = true;
-
+            ModBattles.ActionDisabled = false;
 
         }
 
@@ -430,16 +430,17 @@ namespace ModBattles
         }
         public string ActionDecode(string base64EncodedData)
         {
-            try
-            {
-                var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
-                return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
-            }
-            catch
-            {
-                PluginLog.Log("Error with this string => "+base64EncodedData);
-                return "false";
-            }
+            var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
+            return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
+            //try
+            //{
+               
+            //}
+            //catch
+            //{
+            //    PluginLog.Log("Error with this string => "+base64EncodedData);
+            //    return "false";
+            //}
             
             
         }
@@ -510,7 +511,7 @@ namespace ModBattles
                 target.CurrentAction.Heal = heal;
                 target.CurrentAction.Defense = -25;
                 target.CurrentAction.DefenseTurns = 1;
-                string sendactonraw = target.CurrentAction.Type.ToString() + "=" + target.CurrentAction.Damage.ToString() + "=" + target.CurrentAction.Defense.ToString() + "=" + target.CurrentAction.DefenseTurns.ToString() + "=" + target.CurrentAction.Heal.ToString() + "=" + target.CurrentAction.Invuln.ToString() + "=" + target.CurrentAction.InvulnTurns.ToString() + "=" + target.CurrentAction.Instakill.ToString();
+                string sendactonraw = target.CurrentAction.Type.ToString() + "|" + target.CurrentAction.Damage.ToString() + "|" + target.CurrentAction.Defense.ToString() + "|" + target.CurrentAction.DefenseTurns.ToString() + "|" + target.CurrentAction.Heal.ToString() + "|" + target.CurrentAction.Invuln.ToString() + "|" + target.CurrentAction.InvulnTurns.ToString() + "|" + target.CurrentAction.Instakill.ToString();
                 string sendactione = ActionEncode(sendactonraw);
                 var run = RaptureShellModule.Instance;
                 var macroModule = RaptureMacroModule.Instance;
@@ -701,7 +702,7 @@ namespace ModBattles
                 string sendactonraw = target.CurrentAction.Type.ToString() + "|" + target.CurrentAction.Damage.ToString() + "|" + target.CurrentAction.Defense.ToString() + "|" + target.CurrentAction.DefenseTurns.ToString() + "|" + target.CurrentAction.Heal.ToString() + "|" + target.CurrentAction.Invuln.ToString() + "|" + target.CurrentAction.InvulnTurns.ToString() + "|" + target.CurrentAction.Instakill.ToString();
                 string sendactione = ActionEncode(sendactonraw);
                 
-                string challenge = ModBattles.battle.oppenent.Tell + " A||" + sendactione + "3||" + ModBattles.battle.you.HomeWorld;
+                string challenge = ModBattles.battle.oppenent.Tell + " A||" + sendactione + "||" + ModBattles.battle.you.HomeWorld;
                 var run = RaptureShellModule.Instance;
                 var macroModule = RaptureMacroModule.Instance;
                 var macro = macroModule->GetMacro(0, 1);
@@ -731,7 +732,7 @@ namespace ModBattles
                 PluginLog.Log("Setting opponent action" + ModBattles.battle.you.Health + location + ModBattles.ActionRecieved);
                 ModBattles.ActionRecieved = true;
                 string rawaction = ActionDecode(OppnentAction);
-                string[] A = rawaction.Split(new char[] { '=' }, StringSplitOptions.RemoveEmptyEntries);
+                string[] A = rawaction.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
                 ModBattles.battle.oppenent.CurrentAction.Type = int.Parse(A[0]);
                 ModBattles.battle.oppenent.CurrentAction.Damage = int.Parse(A[1]);
                 ModBattles.battle.oppenent.CurrentAction.Defense = int.Parse(A[2], NumberStyles.AllowLeadingSign);

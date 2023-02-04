@@ -314,7 +314,7 @@ public sealed class ConfigWindow : Window, IDisposable
                         }
                         else
                         {
-                            if (!ModBattles.battle.oppenent.Confirmed)
+                            if (!ModBattles.battle.oppenent.Confirmed && !ModBattles.ActionDisabled)
                             {
                                 ImGui.BeginDisabled();
                             }
@@ -322,7 +322,7 @@ public sealed class ConfigWindow : Window, IDisposable
                             if (ImGui.Button("Heal"))
                             {
                                 var r = new Random();
-
+                                ModBattles.ActionDisabled = true;
                                 ModBattles.battle.SetYourAction(1, r.Next(0, 1000), "no", ModBattles.battle.you, "Your action");
 
                             }
@@ -337,7 +337,7 @@ public sealed class ConfigWindow : Window, IDisposable
                             if (ImGui.Button("Defend"))
                             {
                                 var r = new Random();
-
+                                ModBattles.ActionDisabled = true;
                                 ModBattles.battle.SetYourAction(2, r.Next(0, 1000), "no", ModBattles.battle.you, "Your action");
                             }
                             try
@@ -350,7 +350,7 @@ public sealed class ConfigWindow : Window, IDisposable
                             if (ImGui.Button("Attack"))
                             {
                                 var r = new Random();
-
+                                ModBattles.ActionDisabled = true;
                                 ModBattles.battle.SetYourAction(3, r.Next(0, 1000), "no", ModBattles.battle.you, "Your action");
                             }
                             try
