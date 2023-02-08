@@ -30,6 +30,7 @@ namespace ModBattles
             ModBattles.ActionRecieved = false;
             ModBattles.PlayerReady = true;
             ModBattles.ActionDisabled = false;
+            PluginLog.Log("Ending Cycle should have waited " + wait);
 
         }
 
@@ -216,8 +217,10 @@ namespace ModBattles
             {
                 PluginLog.Log("Fuckery is happening");
             }
+            PluginLog.Log("Starting Wait Cycle");
             background b = new background();
             bw = new BackgroundWorker();
+            
             bw.DoWork += (Battle,a) => b.test(owaittime);
             bw.RunWorkerAsync();
             
@@ -463,7 +466,7 @@ namespace ModBattles
                     tD.Add(target.Emote.Item1, "chara/action/ability/cnj_white/abl010.tmb");
                     //tD.Add("chara/action/emote_sp/sp04.tmb", "chara/action/ability/cnj_white/abl010.tmb");
                     string manip = "";
-                    PluginLog.Log(ModBattles.PTempMod.Invoke("test", "Default", tD, manip, 0).ToString());
+                    PluginLog.Log(ModBattles.PTempModAll.Invoke("test", tD, manip, 0).ToString());
                     ModBattles.Predraw.Invoke(ModBattles.Obj[0], RedrawType.Redraw);
                     //target.TargetSelf();
                 }
@@ -476,7 +479,7 @@ namespace ModBattles
                     //tD.Add("chara/action/emote_sp/sp04.tmb", "chara/action/ability/2gl_astro/abl014.tmb");
                     tD.Add(target.Emote.Item1, "chara/action/ability/2gl_astro/abl014.tmb");
                     string manip = "";
-                    PluginLog.Log(ModBattles.PTempMod.Invoke("test", "Default", tD, manip, 0).ToString());
+                    PluginLog.Log(ModBattles.PTempModAll.Invoke("test", tD, manip, 0).ToString());
                     ModBattles.Predraw.Invoke(ModBattles.Obj[0], RedrawType.Redraw);
                     // target.TargetSelf();
                 }
@@ -489,7 +492,7 @@ namespace ModBattles
                     //tD.Add("chara/action/emote_sp/sp04.tmb", "chara/action/ability/2ff_sage/abl017.tmb");
                     tD.Add(target.Emote.Item1, "chara/action/ability/2ff_sage/abl017.tmb");
                     string manip = "";
-                    PluginLog.Log(ModBattles.PTempMod.Invoke("test", "Default", tD, manip, 0).ToString());
+                    PluginLog.Log(ModBattles.PTempModAll.Invoke("test", tD, manip, 0).ToString());
                     ModBattles.Predraw.Invoke(ModBattles.Obj[0], RedrawType.Redraw);
                     // target.TargetSelf();
                 }
@@ -501,7 +504,7 @@ namespace ModBattles
                    // tD.Add("chara/action/emote_sp/sp04.tmb", "chara/action/limitbreak/lbk_astro_lv3.tmb");
                     tD.Add(target.Emote.Item1, "chara/action/limitbreak/lbk_astro_lv3.tmb");
                     string manip = "";
-                    PluginLog.Log(ModBattles.PTempMod.Invoke("test", "Default", tD, manip, 0).ToString());
+                    PluginLog.Log(ModBattles.PTempModAll.Invoke("test", tD, manip, 0).ToString());
                     ModBattles.Predraw.Invoke(ModBattles.Obj[0], RedrawType.Redraw);
                     //target.TargetSelf();
 
@@ -516,7 +519,7 @@ namespace ModBattles
                 var run = RaptureShellModule.Instance;
                 var macroModule = RaptureMacroModule.Instance;
                 var macro = macroModule->GetMacro(0, 1);
-                string challenge = ModBattles.battle.oppenent.Tell + " A||" + sendactione + "||" + ModBattles.battle.you.HomeWorld;
+                string challenge = "/p A||" + sendactione + "||" + ModBattles.battle.you.HomeWorld;
 
                 var newStr = Utf8String.FromString(challenge);
                 macroModule->ReplaceMacroLines(macro, newStr);
@@ -542,7 +545,7 @@ namespace ModBattles
                     var tD = new Dictionary<string, string>();
                     tD.Add(target.Emote.Item1, "chara/action/ability/2sw_dark/abl004.tmb");
                     string manip = "";
-                    PluginLog.Log(ModBattles.PTempMod.Invoke("test", "Default", tD, manip, 0).ToString());
+                    PluginLog.Log(ModBattles.PTempModAll.Invoke("test", tD, manip, 0).ToString());
                     ModBattles.Predraw.Invoke(ModBattles.Obj[0], RedrawType.Redraw);
 
                     //target.TargetSelf();
@@ -558,7 +561,7 @@ namespace ModBattles
                     var tD = new Dictionary<string, string>();
                     tD.Add(target.Emote.Item1, "chara/action/ability/2ax_warrior/abl010.tmb");
                     string manip = "";
-                    PluginLog.Log(ModBattles.PTempMod.Invoke("test", "Default", tD, manip, 0).ToString());
+                    PluginLog.Log(ModBattles.PTempModAll.Invoke("test", tD, manip, 0).ToString());
                     ModBattles.Predraw.Invoke(ModBattles.Obj[0], RedrawType.Redraw);
                     target.CurrentAction.SelfTarget = false;
 
@@ -573,7 +576,7 @@ namespace ModBattles
                     var tD = new Dictionary<string, string>();
                     tD.Add(target.Emote.Item1, "chara/action/ability/swd_knight/abl017.tmb");
                     string manip = "";
-                    PluginLog.Log(ModBattles.PTempMod.Invoke("test", "Default", tD, manip, 0).ToString());
+                    PluginLog.Log(ModBattles.PTempModAll.Invoke("test", tD, manip, 0).ToString());
                     ModBattles.Predraw.Invoke(ModBattles.Obj[0], RedrawType.Redraw);
                     target.CurrentAction.SelfTarget = false;
 
@@ -587,7 +590,7 @@ namespace ModBattles
                     var tD = new Dictionary<string, string>();
                     tD.Add(target.Emote.Item1, "chara/action/ability/2gb_bgb/abl007.tmb");
                     string manip = "";
-                    PluginLog.Log(ModBattles.PTempMod.Invoke("test", "Default", tD, manip, 0).ToString());
+                    PluginLog.Log(ModBattles.PTempModAll.Invoke("test", tD, manip, 0).ToString());
                     ModBattles.Predraw.Invoke(ModBattles.Obj[0], RedrawType.Redraw);
                     target.CurrentAction.SelfTarget = false;
 
@@ -601,7 +604,7 @@ namespace ModBattles
                 var run = RaptureShellModule.Instance;
                 var macroModule = RaptureMacroModule.Instance;
                 var macro = macroModule->GetMacro(0, 1);
-                string challenge = ModBattles.battle.oppenent.Tell + " A||" + sendactione + "||" + ModBattles.battle.you.HomeWorld;
+                string challenge = "/p A||" + sendactione + "||" + ModBattles.battle.you.HomeWorld;
 
                 var newStr = Utf8String.FromString(challenge);
                 macroModule->ReplaceMacroLines(macro, newStr);
@@ -625,7 +628,7 @@ namespace ModBattles
                     var tD = new Dictionary<string, string>();
                     tD.Add(target.Emote.Item1, "chara/action/ws/bt_2bw_emp/ws_s13.tmb");
                     string manip = "";
-                    PluginLog.Log(ModBattles.PTempMod.Invoke("test", "Default", tD, manip, 0).ToString());
+                    PluginLog.Log(ModBattles.PTempModAll.Invoke("test", tD, manip, 0).ToString());
                     ModBattles.Predraw.Invoke(ModBattles.Obj[0], RedrawType.Redraw);
                     target.CurrentAction.SelfTarget = false;
                 }
@@ -638,7 +641,7 @@ namespace ModBattles
                     var tD = new Dictionary<string, string>();
                     tD.Add(target.Emote.Item1, "chara/action/magic/thm_black/mgc010.tmb");
                     string manip = "";
-                    PluginLog.Log(ModBattles.PTempMod.Invoke("test", "Default", tD, manip, 0).ToString());
+                    PluginLog.Log(ModBattles.PTempModAll.Invoke("test", tD, manip, 0).ToString());
                     ModBattles.Predraw.Invoke(ModBattles.Obj[0], RedrawType.Redraw);
                     target.CurrentAction.SelfTarget = false;
                 }
@@ -652,7 +655,7 @@ namespace ModBattles
                     var tD = new Dictionary<string, string>();
                     tD.Add(target.Emote.Item1, "chara/action/magic/2km_riaper/mgc002.tmb");
                     string manip = "";
-                    PluginLog.Log(ModBattles.PTempMod.Invoke("test", "Default", tD, manip, 0).ToString());
+                    PluginLog.Log(ModBattles.PTempModAll.Invoke("test", tD, manip, 0).ToString());
                     ModBattles.Predraw.Invoke(ModBattles.Obj[0], RedrawType.Redraw);
                     target.CurrentAction.SelfTarget = false;
                 }
@@ -693,7 +696,7 @@ namespace ModBattles
                     tD.Add("vfx/limitbreak/lbk_2sw_lv3/eff/lbk_2sw_lv3_c8s.avfx", ModBattles.PenumbraDirectory + ("/MBR/lbk_2sw_lv3_c8s(bigpattern).avfx").Replace("/", "\\"));
                     //ModBattles.InstaKills[0].Add(target.Emote.Item1, ModBattles.InstaKills[0]["filler"]);
 
-                    PluginLog.Log(ModBattles.PTempMod.Invoke("test", "Default", tD, manip, 0).ToString());
+                    PluginLog.Log(ModBattles.PTempModAll.Invoke("test", tD, manip, 0).ToString());
                     ModBattles.Predraw.Invoke(ModBattles.Obj[0], RedrawType.Redraw);
 
                 }
@@ -701,8 +704,9 @@ namespace ModBattles
                 target.CurrentAction.Instakill = instakill;
                 string sendactonraw = target.CurrentAction.Type.ToString() + "|" + target.CurrentAction.Damage.ToString() + "|" + target.CurrentAction.Defense.ToString() + "|" + target.CurrentAction.DefenseTurns.ToString() + "|" + target.CurrentAction.Heal.ToString() + "|" + target.CurrentAction.Invuln.ToString() + "|" + target.CurrentAction.InvulnTurns.ToString() + "|" + target.CurrentAction.Instakill.ToString();
                 string sendactione = ActionEncode(sendactonraw);
-                
-                string challenge = ModBattles.battle.oppenent.Tell + " A||" + sendactione + "||" + ModBattles.battle.you.HomeWorld;
+
+                string challenge = "/p A||" + sendactione + "||" + ModBattles.battle.you.HomeWorld;
+
                 var run = RaptureShellModule.Instance;
                 var macroModule = RaptureMacroModule.Instance;
                 var macro = macroModule->GetMacro(0, 1);
@@ -777,7 +781,7 @@ namespace ModBattles
             tD.Add("vfx/common/texture/icon_tex02_t1.atex", ModBattles.HpBarBar);
             tD.Add("vfx/common/texture/m0377priz102f_w.atex", ModBattles.Water);
 
-            PluginLog.Log(ModBattles.PTempMod.Invoke("HpBar", "Default", tD, ModBattles.HpBarManips, 0).ToString());
+            PluginLog.Log(ModBattles.PTempModAll.Invoke("HpBar", tD, ModBattles.HpBarManips, 0).ToString());
             ModBattles.Predraw.Invoke(ModBattles.Obj[0], RedrawType.Redraw);
         }
         public void Dispose() { }

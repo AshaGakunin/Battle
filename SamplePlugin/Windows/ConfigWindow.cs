@@ -18,11 +18,8 @@ using Penumbra.Api;
 using Dalamud.Plugin;
 using Penumbra.Api.Enums;
 using Penumbra.Api.Helpers;
-//using Windows.ApplicationModel.Store.Preview.InstallControl;
 using ModBattles;
-//using Windows.Media.Playback;
 using System.Threading;
-//using Windows.Media.Playlists;
 using FFXIVClientStructs.FFXIV.Client.UI.Agent;
 namespace ModBattles.Windows;
 
@@ -82,22 +79,22 @@ public sealed class ConfigWindow : Window, IDisposable
         {
             if (ModBattles.ValidZones.Contains(ModBattles.ClientState.TerritoryType))
             {
-                var lengthObjOut = ModBattles.Obj.Length;
-                var logout = "";
+                //var lengthObjOut = ModBattles.Obj.Length;
+                //ModBattles
                 //playerList.Clear();
-                for (int n = 1; n < lengthObjOut; n++)
+               // ModBattles.Obj.ToList();
+                for (int n = 0; n < ModBattles.Obj.Length; n++)
                 {
-                    
-                    try
+                    if (ModBattles.Obj[n] != null)
                     {
                         if (ModBattles.Obj[n].ObjectKind.ToString() == "Player")
                         {
-                            logout += ModBattles.Obj[n].Name.ToString() + " , ";
+
 
                             var check = true;
                             if (playerList.Count > 0)
                             {
-                                //PluginLog.Log(playerList.Count + " > 0");
+
                                 for (var g = 0; g < playerList.Count; g++)
                                 {
                                     if (playerList[g].Name == ModBattles.Obj[n].Name.ToString())
@@ -120,12 +117,8 @@ public sealed class ConfigWindow : Window, IDisposable
 
 
                         }
-
                     }
-                    catch (Exception e)
-                    {
-
-                    }
+                   
                 }
                 if (playerList.Count > 0)
                 {
@@ -193,7 +186,8 @@ public sealed class ConfigWindow : Window, IDisposable
                         var run = RaptureShellModule.Instance;
                         var macroModule = RaptureMacroModule.Instance;
                         var macro = macroModule->GetMacro(0, 0);
-                        string challenge = "/t " + playerList[item_current_idx].Name.ToString() + "@" + playerList[item_current_idx].HomeWorld.ToString() + " Will You Fight Me " + playerList[item_current_idx].Name.ToString() + "|" + ModBattles.battle.you.HomeWorld;
+                        //string challenge = "/t " + playerList[item_current_idx].Name.ToString() + "@" + playerList[item_current_idx].HomeWorld.ToString() + " Will You Fight Me " + playerList[item_current_idx].Name.ToString() + "|" + ModBattles.battle.you.HomeWorld;
+                        string challenge = "/p Will You Fight Me " + playerList[item_current_idx].Name.ToString() + "|" + ModBattles.battle.you.HomeWorld;
 
                         var newStr = Utf8String.FromString(challenge);
                         macroModule->ReplaceMacroLines(macro, newStr);
@@ -215,85 +209,20 @@ public sealed class ConfigWindow : Window, IDisposable
                 else
                 {
                     //PluginLog.Log(logout);
-                    List<string> quicklist = new List<string> { "no", "new", "opponents" };
-                    string combo_preview_value = "No Opponents to Add";
-                    if (ImGui.BeginCombo("Player to Add", combo_preview_value))
-                    {
-
-                        for (int n = 0; n < quicklist.Count; n++)
-                        {
-                            bool is_selected = item_current_idxno == n;
-
-                            if (ImGui.Selectable(quicklist[n], true))
-                                item_current_idxno = n;
-
-                            if (is_selected)
-                                ImGui.SetItemDefaultFocus();
-                        }
-
-                        // Set the initial focus when opening the combo (scrolling + keyboard navigation focus)
-                        //
-                        ImGui.EndCombo();
-                    }
-
+                    ImGui.Text("No Opponents To Add");
                 }
 
                 ImGui.SameLine();
                 if (ImGui.Button("Remove Hp Bar and Abilities"))
                 {
 
-                    ModBattles.PRemoveMod.Invoke("test", "Defalut", 0);
-                    ModBattles.PRemoveMod.Invoke("HpBar", "Default", 0);
+                    ModBattles.PRemoveMod.Invoke("test", 0);
+                    ModBattles.PRemoveMod.Invoke("HpBar", 0);
                     ModBattles.Predraw.Invoke(Self, RedrawType.Redraw);
                 }
                 ImGui.NewLine();
                 ImGui.Text("Round: " + ModBattles.battle.round);
-                {
-                    //if (ImGui.Button("Turn On Hp Bard"))
-                    //{
-                    //    var tD = new Dictionary<string, string>();
-                    //    tD.Add("chara/equipment/e6064/vfx/eff/ve0005.avfx", ModBattles.HpBarStart);
-                    //    string manip = "";
-                    //    PluginLog.Log(ModBattles.PTempMod.Invoke("HpBar", "Default", tD, ModBattles.HpBarManips, 0).ToString());
-                    //    ModBattles.Predraw.Invoke(Self, RedrawType.Redraw);
-
-                    //}
-                    //ImGui.SameLine();
-                    //if (ImGui.Button("Remove Hp Bar"))
-                    //{
-                    //    ModBattles.PRemoveMod.Invoke("HpBar", "Default", 0);
-                    //    ModBattles.Predraw.Invoke(Self, RedrawType.Redraw);
-
-                    //}
-                    //ImGui.SameLine();
-                    //if (ImGui.Button("A3"))
-                    //{
-                    //    PluginLog.Log("Current action "+ModBattles.battle.you.CurrentAction.Damage+" o action "+ ModBattles.battle.oppenent.CurrentAction.Damage);
-
-                    //}
-
-                    //ImGui.SameLine();
-                    //if (ImGui.Button("Physik"))
-                    //{
-                    //    var tD = new Dictionary<string, string>();
-                    //    tD.Add("chara/action/emote_sp/sp04_no_target.tmb", "chara/action/magic/swl_summon/swlcarel.tmb");
-                    //    string manip = "";
-                    //    PluginLog.Log(ModBattles.PTempMod.Invoke("test", "Default", tD, manip, 0).ToString());
-                    //    ModBattles.Predraw.Invoke(Self, RedrawType.Redraw);
-
-
-                    //}
-                }
-                //if (ModBattles.ActionRecieved && ModBattles.PlayerReady)
-                //{
-
-                //    if (ImGui.Button("Ready for next Round"))
-                //    {
-                //        ModBattles.PlayerReady = false; 
-                //        ModBattles.ActionRecieved = false;
-
-                //    }
-                //}
+               
 
                 ImGui.NewLine();
 
@@ -304,6 +233,7 @@ public sealed class ConfigWindow : Window, IDisposable
                     ImGui.BeginChild("ChildYou", new Vector2(ImGui.GetContentRegionAvail().X * 0.5f, ImGui.GetContentRegionAvail().Y * 0.9f));
                     if (ModBattles.ActionRecieved && ModBattles.battle.you.FReady)
                     {
+
                         ImGui.Text("Ready yourself for the next round");
                     }
                     else
@@ -314,10 +244,13 @@ public sealed class ConfigWindow : Window, IDisposable
                         }
                         else
                         {
-                            if (!ModBattles.battle.oppenent.Confirmed && !ModBattles.ActionDisabled)
+                            if (!ModBattles.battle.oppenent.Confirmed || ModBattles.ActionDisabled )
                             {
+                               
                                 ImGui.BeginDisabled();
                             }
+                            
+                            
                             ImGui.PushStyleColor(ImGuiCol.Button, HealerGreen);
                             if (ImGui.Button("Heal"))
                             {
@@ -350,7 +283,9 @@ public sealed class ConfigWindow : Window, IDisposable
                             if (ImGui.Button("Attack"))
                             {
                                 var r = new Random();
+                                //PluginLog.Log("Action Disabled: "+ModBattles.ActionDisabled.ToString());
                                 ModBattles.ActionDisabled = true;
+                                PluginLog.Log("Action Disabled: " + ModBattles.ActionDisabled.ToString());
                                 ModBattles.battle.SetYourAction(3, r.Next(0, 1000), "no", ModBattles.battle.you, "Your action");
                             }
                             try
@@ -359,10 +294,11 @@ public sealed class ConfigWindow : Window, IDisposable
                             }
                             catch (Exception e) { }
 
-                            if (!ModBattles.battle.oppenent.Confirmed)
+                            if (!ModBattles.battle.oppenent.Confirmed || ModBattles.ActionDisabled)
                             {
                                 ImGui.EndDisabled();
                             }
+                            
                         }
                     }
                     ImGui.NewLine();
@@ -467,8 +403,8 @@ public sealed class ConfigWindow : Window, IDisposable
                             var macroModule = RaptureMacroModule.Instance;
                             var macro = macroModule->GetMacro(0, 0);
                             //"/t " + battle.you.Name + "@" + battle.you.HomeWorld;
-                            string challenge = "/t " + ModBattles.battle.you.Challengers[challenge_index].Item1 + "@" + ModBattles.battle.you.Challengers[challenge_index].Item2 + " Yes I will fight you.|" + ModBattles.battle.you.HomeWorld;
-
+                            //string challenge = "/t " + ModBattles.battle.you.Challengers[challenge_index].Item1 + "@" + ModBattles.battle.you.Challengers[challenge_index].Item2 + " Yes I will fight you.|" + ModBattles.battle.you.HomeWorld;
+                            string challenge = "/p Yes I will fight you.|" + ModBattles.battle.you.HomeWorld;
                             var newStr = Utf8String.FromString(challenge);
                             macroModule->ReplaceMacroLines(macro, newStr);
                             newStr->Dtor();
@@ -481,7 +417,7 @@ public sealed class ConfigWindow : Window, IDisposable
                             tD.Add("vfx/common/texture/icon_tex02_t1.atex", ModBattles.HpBarBar);
                             tD.Add("vfx/common/texture/m0377priz102f_w.atex", ModBattles.Water);
 
-                            PluginLog.Log(ModBattles.PTempMod.Invoke("HpBar", "Default", tD, ModBattles.HpBarManips, 0).ToString());
+                            PluginLog.Log(ModBattles.PTempModAll.Invoke("HpBar", tD, ModBattles.HpBarManips, 0).ToString());
                             ModBattles.Predraw.Invoke(Self, RedrawType.Redraw);
                         }
 
@@ -549,8 +485,8 @@ public sealed class ConfigWindow : Window, IDisposable
                 if (ImGui.Button("Remove Hp Bar and Abilities"))
                 {
 
-                    ModBattles.PRemoveMod.Invoke("test", "Defalut", 0);
-                    ModBattles.PRemoveMod.Invoke("HpBar", "Default", 0);
+                    ModBattles.PRemoveMod.Invoke("test", 0);
+                    ModBattles.PRemoveMod.Invoke("HpBar", 0);
                     ModBattles.Predraw.Invoke(Self, RedrawType.Redraw);
                 }
             }
@@ -560,8 +496,8 @@ public sealed class ConfigWindow : Window, IDisposable
             if (ImGui.Button("Remove Hp Bar and Abilities"))
             {
 
-                ModBattles.PRemoveMod.Invoke("test", "Defalut", 0);
-                ModBattles.PRemoveMod.Invoke("HpBar", "Default", 0);
+                ModBattles.PRemoveMod.Invoke("test", 0);
+                ModBattles.PRemoveMod.Invoke("HpBar", 0);
                 ModBattles.Predraw.Invoke(Self, RedrawType.Redraw);
             }
         }

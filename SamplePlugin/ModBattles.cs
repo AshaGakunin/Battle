@@ -83,9 +83,10 @@ namespace ModBattles
         public static Penumbra.Api.Helpers.FuncSubscriber<string, string, string, string, string, PenumbraApiEc> PSetSettings { get; set; }
         public static Penumbra.Api.Helpers.FuncSubscriber<string, string, string, bool, PenumbraApiEc> PTurnon { get; set; }
         public static Penumbra.Api.Helpers.FuncSubscriber<string, string, IDictionary<string, (IList<string>, GroupType)>?> PGetSettings { get; set; }
-        public static FuncSubscriber<string, string, int, PenumbraApiEc> PRemoveMod { get; set; }
+        public static FuncSubscriber<string, int, PenumbraApiEc> PRemoveMod { get; set; }
         public static Penumbra.Api.Helpers.FuncSubscriber<string, string, System.Collections.Generic.Dictionary<string, string>, string, int, PenumbraApiEc> PTempMod { get; set; }
         public static Penumbra.Api.Helpers.FuncSubscriber<string> PGetModDirectory { get; set; }
+        public static FuncSubscriber<string, System.Collections.Generic.Dictionary<string, string>, string, int, PenumbraApiEc> PTempModAll { get; set; }
         public static FuncSubscriber<string, PenumbraApiEc> PAddDirectory { get; set; }
         public static string PenumbraDirectory { get; set; }
 
@@ -109,6 +110,9 @@ namespace ModBattles
         public static bool ActionDisabled=false;
         private void OnChatMessage(XivChatType type, uint id, ref SeString sender, ref SeString message, ref bool handled)
         {
+            PluginLog.Log(sender.ToString() + " " + sender.TextValue + " " + sender.Payloads.Count+" " + sender.Payloads[0].ToString());
+
+
             //Oppnent not confirmed
             if (!battle.oppenent.Confirmed)
             {
@@ -170,7 +174,8 @@ namespace ModBattles
                 if (sender.ToString() == battle.oppenent.Name)
                 {
                     string[] B = message.ToString().Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
-                    if (B[0] == "A" && type.ToString() == "TellIncoming")
+                   // && type.ToString() == "TellIncoming"
+                    if (B[0] == "A" )
                     {
                         if (B[2] == battle.oppenent.HomeWorld)
                         {
@@ -255,8 +260,18 @@ namespace ModBattles
             {
                 StartBattle();
             }
-            
 
+            PluginLog.Log(Obj.Length.ToString() + " LENGTH ");
+            PluginLog.Log(Obj.ToString());
+            for(var i=0; i<Obj.Length; i++)
+            {
+                if(Obj[i] != null)
+                {
+                    PluginLog.Log(Obj[i].ObjectKind.ToString());
+
+                }
+                
+            }
             
             /// <summary>
             /// Set a temporary mod with the given paths, manipulations and priority and the name tag to a specific collection.
@@ -278,9 +293,11 @@ namespace ModBattles
             PTurnon = Penumbra.Api.Ipc.TrySetMod.Subscriber(PluginInterface);
             PGetSettings = Penumbra.Api.Ipc.GetAvailableModSettings.Subscriber(PluginInterface);
             PGetModDirectory = Penumbra.Api.Ipc.GetModDirectory.Subscriber(PluginInterface);
-            PRemoveMod = Ipc.RemoveTemporaryMod.Subscriber(PluginInterface);
+            PRemoveMod = Ipc.RemoveTemporaryModAll.Subscriber(PluginInterface);
             PAddDirectory = Ipc.AddMod.Subscriber(PluginInterface);
             PenumbraDirectory = PGetModDirectory.Invoke();
+            PTempModAll = Ipc.AddTemporaryModAll.Subscriber(PluginInterface);
+
            
 
             // Building Redirect Paths
