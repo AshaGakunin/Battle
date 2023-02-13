@@ -5,7 +5,7 @@
         "Punchline": "Battle with others in a game of skill and luck.",
         "Description": "/MB to or hit the gear icon to get to the main page.",
         "InternalName": "ModBattles",
-        "AssemblyVersion": "1.2.0.0",
+        "AssemblyVersion": "1.2.0.1",
         "RepoUrl": "https://github.com/AshaGakunin/Battle",
         "ApplicableVersion": "any",
         "Tags": [
@@ -19,9 +19,9 @@
         "LoadPriority": 69421,
         "LoadRequiredState": 2,
         "LoadSync": true,
-        "DownloadLinkInstall": "https://github.com/AshaGakunin/Battle/releases/download/1.2.0.0/latestr.zip",
-        "DownloadLinkTesting": "https://github.com/AshaGakunin/Battle/releases/download/1.2.0.0/latestr.zip",
-        "DownloadLinkUpdate": "https://github.com/AshaGakunin/Battle/releases/download/1.2.0.0/latestr.zip"
+        "DownloadLinkInstall": "https://github.com/AshaGakunin/Battle/releases/download/1.2.0.1/latestr.zip",
+        "DownloadLinkTesting": "https://github.com/AshaGakunin/Battle/releases/download/1.2.0.1/latestr.zip",
+        "DownloadLinkUpdate": "https://github.com/AshaGakunin/Battle/releases/download/1.2.0.1/latestr.zip"
 
     }
 ]
