@@ -110,10 +110,19 @@ namespace ModBattles
         public static bool ActionDisabled=false;
         private void OnChatMessage(XivChatType type, uint id, ref SeString sender, ref SeString message, ref bool handled)
         {
-            //PluginLog.Log(sender.ToString() + " " + sender.TextValue + " " + sender.Payloads.Count+" " + sender.Payloads[0].ToString());
+            PluginLog.Log(sender.ToString() + " " + sender.TextValue + " " + sender.Payloads.Count + " " + sender.Payloads[0].ToString() + " " + message.ToString());
 
-
+            PluginLog.Log(battle.oppenent.HomeWorld+" "+battle.oppenent.Name);
             //Oppnent not confirmed
+            var charsToRemove = new string[] {"","","","","","","","","","","","","","","","","" };
+            string senderstring = sender.ToString();
+            foreach (var c in charsToRemove)
+            {
+                senderstring = senderstring.Replace(c, string.Empty);
+            }
+
+            PluginLog.Log(sender.ToString() + " vs " + senderstring);
+           
             if (!battle.oppenent.Confirmed)
             {
                 //PluginLog hallenge
@@ -144,7 +153,12 @@ namespace ModBattles
                 {
                     if (battle.oppenent.Name != "")
                     {
-                        if (sender.ToString() == battle.oppenent.Name)
+                       
+                        string secondpossiblesenderstring = senderstring;
+                        secondpossiblesenderstring = senderstring.Replace(battle.oppenent.HomeWorld, string.Empty);
+                        //if (sender.ToString() == battle.oppenent.Name)
+                        PluginLog.Log(secondpossiblesenderstring + " vs " + senderstring + " vs " + battle.oppenent.Name);
+                        if(secondpossiblesenderstring == battle.oppenent.Name || senderstring==battle.oppenent.Name)
                         {
                             if (A[1] == battle.oppenent.HomeWorld)
                             {
@@ -171,7 +185,9 @@ namespace ModBattles
             }
             else
             {
-                if (sender.ToString() == battle.oppenent.Name)
+                string secondpossiblesenderstring = senderstring;
+                secondpossiblesenderstring = senderstring.Replace(battle.oppenent.HomeWorld, string.Empty);
+                if (secondpossiblesenderstring == battle.oppenent.Name || senderstring == battle.oppenent.Name)
                 {
                     string[] B = message.ToString().Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
                    // && type.ToString() == "TellIncoming"
