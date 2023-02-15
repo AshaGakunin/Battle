@@ -249,6 +249,9 @@ public sealed class ConfigWindow : Window, IDisposable
                                
                                 ImGui.BeginDisabled();
                             }
+                            else {
+                                PluginLog.Log(ModBattles.battle.oppenent.Confirmed.ToString() + " action " + ModBattles.ActionRecieved);
+                                }
                             
                             
                             ImGui.PushStyleColor(ImGuiCol.Button, HealerGreen);
@@ -393,6 +396,7 @@ public sealed class ConfigWindow : Window, IDisposable
 
                             ModBattles.battle.oppenent.Confirmed = true;
                             ModBattles.battle.oppenent.FReady = false;
+                            ModBattles.ActionRecieved = false;
                             ModBattles.battle.oppenent.Name = ModBattles.battle.you.Challengers[challenge_index].Item1;
                             ModBattles.battle.oppenent.HomeWorld = ModBattles.battle.you.Challengers[challenge_index].Item2;
                             ModBattles.battle.oppenent.Tell= "/t " + ModBattles.battle.you.Challengers[challenge_index].Item1 + "@" + ModBattles.battle.you.Challengers[challenge_index].Item2;

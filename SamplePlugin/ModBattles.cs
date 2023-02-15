@@ -110,9 +110,9 @@ namespace ModBattles
         public static bool ActionDisabled=false;
         private void OnChatMessage(XivChatType type, uint id, ref SeString sender, ref SeString message, ref bool handled)
         {
-            PluginLog.Log(sender.ToString() + " " + sender.TextValue + " " + sender.Payloads.Count + " " + sender.Payloads[0].ToString() + " " + message.ToString());
+            //PluginLog.Log(sender.ToString() + " " + sender.TextValue + " " + sender.Payloads.Count + " " + sender.Payloads[0].ToString() + " " + message.ToString());
 
-            PluginLog.Log(battle.oppenent.HomeWorld+" "+battle.oppenent.Name);
+            //PluginLog.Log(battle.oppenent.HomeWorld+" "+battle.oppenent.Name);
             //Oppnent not confirmed
             var charsToRemove = new string[] {"","","","","","","","","","","","","","","","","" };
             string senderstring = sender.ToString();
