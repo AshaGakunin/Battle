@@ -251,7 +251,7 @@ public sealed class ConfigWindow : Window, IDisposable
                             }
                             else {
                                 PluginLog.Log(ModBattles.battle.oppenent.Confirmed.ToString() + " action " + ModBattles.ActionRecieved);
-                                }
+                            }
                             
                             
                             ImGui.PushStyleColor(ImGuiCol.Button, HealerGreen);

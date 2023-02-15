@@ -110,9 +110,15 @@ namespace ModBattles
         public static bool ActionDisabled=false;
         private void OnChatMessage(XivChatType type, uint id, ref SeString sender, ref SeString message, ref bool handled)
         {
-            //PluginLog.Log(sender.ToString() + " " + sender.TextValue + " " + sender.Payloads.Count + " " + sender.Payloads[0].ToString() + " " + message.ToString());
+            try
+            {
+                PluginLog.Log(sender.ToString() + " " + sender.TextValue + " " + sender.Payloads.Count + " " + sender.Payloads[0].ToString() + " " + message.ToString());
 
-            //PluginLog.Log(battle.oppenent.HomeWorld+" "+battle.oppenent.Name);
+                PluginLog.Log(battle.oppenent.HomeWorld + " " + battle.oppenent.Name);
+            }catch(Exception e)
+            {
+
+            }
             //Oppnent not confirmed
             var charsToRemove = new string[] {"","","","","","","","","","","","","","","","","" };
             string senderstring = sender.ToString();
@@ -157,7 +163,13 @@ namespace ModBattles
                         string secondpossiblesenderstring = senderstring;
                         secondpossiblesenderstring = senderstring.Replace(battle.oppenent.HomeWorld, string.Empty);
                         //if (sender.ToString() == battle.oppenent.Name)
-                        PluginLog.Log(secondpossiblesenderstring + " vs " + senderstring + " vs " + battle.oppenent.Name);
+                        try
+                        {
+                            PluginLog.Log(secondpossiblesenderstring + " vs " + senderstring + " vs " + battle.oppenent.Name);
+                        }catch(Exception e)
+                        {
+
+                        }
                         if(secondpossiblesenderstring == battle.oppenent.Name || senderstring==battle.oppenent.Name)
                         {
                             if (A[1] == battle.oppenent.HomeWorld)
